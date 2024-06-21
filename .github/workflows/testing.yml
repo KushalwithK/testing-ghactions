@@ -1,0 +1,16 @@
+name: Testing
+
+on: push
+
+jobs:
+  testing-lint:
+    name: Testing lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Run lint
+        uses: github/super-linter@v3
+        env: 
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
