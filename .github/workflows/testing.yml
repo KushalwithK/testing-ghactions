@@ -1,16 +1,15 @@
-name: Testing
+name: Testing GH Actions
 
-on: push
+on: [push]
 
 jobs:
-  testing-lint:
-    name: Testing lint
+  checking-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v2
-      - name: Run lint
-        uses: github/super-linter@latest
-        env: 
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: install nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: install bats
+        run: npm i -g bats
+      - run: bats -v
